@@ -8,8 +8,10 @@ uint32_t IF_Fetch(void)
         imem_file = fopen("data/imem.mem", "r");
 
     uint8_t instruction_char[33] = { 0 };
-    fscanf(imem_file, "%32s", instruction_char);
+    int ret = 0;
+    ret = fscanf(imem_file, "%32s", instruction_char);
     fscanf(imem_file, "%*[^\n]%*c");
+    if (ret == -1 || ret == EOF) return 0;
 
     uint32_t instruction = 0;
     for (uint8_t i = 0; i < 32; i++) {

@@ -13,7 +13,7 @@ isa_r_handler_t isa_r_handler_lut[] = {
     { 0x300, ISA_R_sltu },
 };
 
-static const uint16_t num_of_isa_r_handler = sizeof(isa_r_handler_lut);
+static const uint16_t num_of_isa_r_handler = sizeof(isa_r_handler_lut) / sizeof(isa_r_handler_lut[0]);
 
 int16_t ISA_R_Handler(isa_input_t* input)
 {
