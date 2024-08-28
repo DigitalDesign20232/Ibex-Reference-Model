@@ -28,3 +28,5 @@
     - RV32I:
         - R-Type
         - I-Type: Arithmetic operation
+
+![current_support_isa](img/current_support_isa.png)
