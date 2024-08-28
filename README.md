@@ -18,12 +18,13 @@
     ```
 
 - The initialized value of Register File, IMEM and DMEM can be changed in:
-    - `register_file.mem`
-    - `imem.mem`
-    - `dmem.mem`
+    - `register_file.mem`: Decimal
+    - `imem.mem`: Binary
+    - `dmem.mem`: Not implemented yet
 
 ## Feature
 
 - Supported Extension:
     - RV32I:
         - R-Type
+        - I-Type: Arithmetic operation
