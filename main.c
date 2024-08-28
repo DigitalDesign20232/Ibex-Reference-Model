@@ -31,6 +31,7 @@ int main()
         WB_WriteReg(&ibex_system);
     }
 
+    IF_Destructor();
     printf("\nIllegal Instruction");
     printf("\nProgram halted!");
     printf("\n");

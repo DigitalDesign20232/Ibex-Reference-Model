@@ -18,3 +18,7 @@ uint32_t IF_Fetch(void)
 
     return instruction;
 }
+
+void IF_Destructor(void) {
+    fclose(imem_file);
+}

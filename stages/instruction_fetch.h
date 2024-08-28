@@ -5,5 +5,6 @@
 #include <stdint.h>
 
 uint32_t IF_Fetch(void);
+void IF_Destructor(void);
 
 #endif
