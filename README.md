@@ -4,7 +4,7 @@
 
 - Clone the repository:
     ```
-    git clone
+    git clone https://github.com/DigitalDesign20232/Ibex-Reference-Model.git
     ```
 
 - From the root directory, build with:
@@ -24,6 +24,6 @@
 
 ## Feature
 
-- Support:
+- Supported Extension:
     - RV32I:
         - R-Type
