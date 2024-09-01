@@ -1,4 +1,4 @@
-#include "mem_list.h"
+#include "../mem_list.h"
 #include <stdio.h>
 
 void print_list(mem_list_t* list)
@@ -30,6 +30,7 @@ int main()
     MEM_LIST_Insert(&list, 0x1243AB5A, 5224535);
     MEM_LIST_Insert(&list, 0x1243AB5E, 14453);
     print_list(&list);
+    printf("\nSearch value at address 0x%08X: %d", 0x1243AB5F, MEM_LIST_Search(&list, 0x1243AB5F));
 
     MEM_LIST_Destructor(&list);
 }

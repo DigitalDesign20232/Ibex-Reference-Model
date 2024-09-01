@@ -85,6 +85,9 @@ uint32_t MEM_LIST_Search(mem_list_t* mem_list, uint32_t address)
         if (current->data.address == address) {
             return current->data.value; // Return the value if found
         }
+        if (current->data.address > address) {
+            return 0; // Return the value if found
+        }
         current = current->next; // Move to the next node
     }
 
