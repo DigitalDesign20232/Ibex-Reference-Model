@@ -1,13 +1,15 @@
-#include <stdlib.h>
 #include "mem_list.h"
+#include <stdlib.h>
 
 // Constructor for the memory list
-void MEM_LIST_Constructor(mem_list_t* mem_list) {
+void MEM_LIST_Constructor(mem_list_t* mem_list)
+{
     mem_list->head = NULL;
 }
 
 // Destructor for the memory list
-void MEM_LIST_Destructor(mem_list_t* mem_list) {
+void MEM_LIST_Destructor(mem_list_t* mem_list)
+{
     mem_list_node_t* current = mem_list->head;
     while (current != NULL) {
         mem_list_node_t* next = current->next;
@@ -18,9 +20,10 @@ void MEM_LIST_Destructor(mem_list_t* mem_list) {
 }
 
 // Insert a new node into the memory list in sorted order
-void MEM_LIST_Insert(mem_list_t* mem_list, uint32_t address, uint32_t value) {
+void MEM_LIST_Insert(mem_list_t* mem_list, uint32_t address, uint32_t value)
+{
     // Create a new node
-    mem_list_node_t* new_node = (mem_list_node_t*)malloc(sizeof(mem_list_node_t));
+    mem_list_node_t* new_node = (mem_list_node_t*) malloc(sizeof(mem_list_node_t));
     if (new_node == NULL) {
         // Handle memory allocation failure
         return; // or handle the error as necessary
@@ -70,4 +73,22 @@ void MEM_LIST_Insert(mem_list_t* mem_list, uint32_t address, uint32_t value) {
         new_node->next = current->next;
         current->next = new_node;
     }
+}
+
+// Search for the value corresponding to the given address
+uint32_t MEM_LIST_Search(mem_list_t* mem_list, uint32_t address)
+{
+    mem_list_node_t* current = mem_list->head;
+
+    // Traverse the list to find the node with the specified address
+    while (current != NULL) {
+        if (current->data.address == address) {
+            return current->data.value; // Return the value if found
+        }
+        current = current->next; // Move to the next node
+    }
+
+    // If the address is not found, you can return a specific value (e.g., 0)
+    // or handle the error as needed. Here we return 0 for simplicity.
+    return 0;
 }

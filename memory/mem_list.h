@@ -3,7 +3,7 @@
 
 #include "mem_def.h"
 
-struct mem_list_node_t{
+struct mem_list_node_t {
     struct mem_list_node_t* next;
     mem_node_t data;
 };
@@ -16,5 +16,6 @@ typedef struct {
 void MEM_LIST_Constructor(mem_list_t* mem_list);
 void MEM_LIST_Destructor(mem_list_t* mem_list);
 void MEM_LIST_Insert(mem_list_t* mem_list, uint32_t address, uint32_t value);
+uint32_t MEM_LIST_Search(mem_list_t* mem_list, uint32_t address);
 
 #endif
