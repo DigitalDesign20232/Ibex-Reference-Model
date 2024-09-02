@@ -18,8 +18,8 @@ int main()
 
     uint32_t instruction = 0;
     while (1) {
-        instruction = IF_Fetch();
-        printf("\nFetched Instruction: %X", instruction);
+        instruction = IF_Fetch(&ibex_system);
+        printf("\nFetched Instruction: 0x%X", instruction);
 
         int16_t index = ID_Decode(instruction, &input);
         if (index == -1)

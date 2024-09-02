@@ -3,8 +3,9 @@
 
 #include <stdio.h>
 #include <stdint.h>
+#include "ibex_system.h"
 
-uint32_t IF_Fetch(void);
+uint32_t IF_Fetch(ibex_system_t* ibex_system);
 void IF_Destructor(void);
 
 #endif

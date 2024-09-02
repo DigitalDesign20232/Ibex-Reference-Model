@@ -1,26 +1,15 @@
 #include "instruction_fetch.h"
 
-static FILE* imem_file = NULL;
-
-uint32_t IF_Fetch(void)
+uint32_t IF_Fetch(ibex_system_t* ibex_system)
 {
-    if (!imem_file)
-        imem_file = fopen("data/imem.mem", "r");
+    static mem_list_node_t* node = NULL;
+    if (!node) node = ibex_system->imem.head;
+    else if (!node->next) return 0;
+    else node = node->next;
 
-    uint8_t instruction_char[33] = { 0 };
-    int ret = 0;
-    ret = fscanf(imem_file, "%32s", instruction_char);
-    fscanf(imem_file, "%*[^\n]%*c");
-    if (ret == -1 || ret == EOF) return 0;
-
-    uint32_t instruction = 0;
-    for (uint8_t i = 0; i < 32; i++) {
-        instruction = instruction | (((uint8_t) (instruction_char[i] - '0')) << (31 - i));
-    }
-
-    return instruction;
+    return node->data.value;
 }
 
 void IF_Destructor(void) {
-    fclose(imem_file);
+
 }
