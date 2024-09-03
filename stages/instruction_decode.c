@@ -56,5 +56,6 @@ int16_t ID_Decode(uint32_t instruction, isa_input_t* input)
 
 int16_t ID_RunInstruction(int16_t id_lut_index, isa_input_t* input)
 {
+    input->ibex_system->ibex_core.pc += 4;
     return id_lut[id_lut_index].instruction_handler(input);
 }

@@ -16,12 +16,12 @@ int main()
         .ibex_system = &ibex_system,
     };
 
-    uint32_t pc = 0;
+    uint32_t instruction = 0;
     while (1) {
-        pc = IF_Fetch(&ibex_system);
-        printf("\nFetched Instruction: 0x%X", pc);
+        instruction = IF_Fetch(&ibex_system);
+        printf("\nFetched Instruction: 0x%X", instruction);
 
-        int16_t index = ID_Decode(pc, &input);
+        int16_t index = ID_Decode(instruction, &input);
         if (index == -1)
             break;
 
@@ -32,7 +32,7 @@ int main()
         WB_WriteReg(&ibex_system);
     }
 
-    printf("\n\nIllegal Instruction: 0x%X", pc);
+    printf("\n\nIllegal Instruction: 0x%X", instruction);
     printf("\nProgram halted!");
     printf("\n");
 

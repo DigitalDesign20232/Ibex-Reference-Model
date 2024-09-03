@@ -7,6 +7,8 @@ void IBEX_SYSTEM_Constructor(ibex_system_t* ibex_system)
     IBEX_SYSTEM_RegisterFile_Init(&ibex_system->ibex_core.reg_file);
     IBEX_SYSTEM_Imem_Init(&ibex_system->imem);
     IBEX_SYSTEM_Dmem_Init(&ibex_system->dmem);
+
+    ibex_system->ibex_core.pc = ibex_system->imem.head->data.address;
 }
 
 void IBEX_SYSTEM_Destructor(ibex_system_t* ibex_system)
