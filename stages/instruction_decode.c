@@ -76,5 +76,6 @@ int16_t ID_RunInstruction(int16_t id_lut_index, isa_input_t* input)
     int16_t index = id_lut[id_lut_index].instruction_handler(input);
     if (current_pc == input->ibex_system->ibex_core.pc)
         input->ibex_system->ibex_core.pc += 4;
+    input->ibex_system->ibex_core.reg_file.x[0] = 0;
     return index;
 }
