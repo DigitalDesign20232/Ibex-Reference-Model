@@ -13,11 +13,11 @@ static const uint16_t num_of_isa_s_handler = sizeof(isa_b_handler_lut) / sizeof(
 
 int16_t ISA_B_Handler(isa_input_t* input)
 {
-    isa_s_data_t* isa_s = &input->type.s;
+    isa_b_data_t* isa_b = &input->type.b;
 
     for (uint16_t i = 0; i < num_of_isa_s_handler; i++) {
-        if (isa_s->funct3 == isa_b_handler_lut[i].funct3) {
-            isa_b_handler_lut[i].instruction(input->ibex_system, isa_s->rs1, isa_s->rs2, isa_s->imm);
+        if (isa_b->funct3 == isa_b_handler_lut[i].funct3) {
+            isa_b_handler_lut[i].instruction(input->ibex_system, isa_b->rs1, isa_b->rs2, isa_b->imm);
             return ((int16_t) i);
         }
     }

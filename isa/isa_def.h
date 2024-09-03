@@ -7,6 +7,7 @@
 #include "isa_r_type_def.h"
 #include "isa_s_type_def.h"
 #include "isa_j_type_def.h"
+#include "isa_u_type_def.h"
 
 typedef enum {
     ISA_R,
@@ -14,6 +15,7 @@ typedef enum {
     ISA_S,
     ISA_B,
     ISA_J,
+    ISA_U,
 } isa_type_t;
 
 typedef union {
@@ -22,6 +24,7 @@ typedef union {
     isa_s_data_t s;
     isa_b_data_t b;
     isa_j_data_t j;
+    isa_u_data_t u;
 } isa_type_data_t;
 
 typedef struct {

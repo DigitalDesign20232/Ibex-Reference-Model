@@ -17,11 +17,11 @@ static const uint16_t num_of_isa_r_handler = sizeof(isa_r_handler_lut) / sizeof(
 
 int16_t ISA_R_Handler(isa_input_t* input)
 {
-    isa_r_data_t* r = &input->type.r;
+    isa_r_data_t* isa_r = &input->type.r;
 
     for (uint16_t i = 0; i < num_of_isa_r_handler; i++) {
         if (input->type.r.funct3funct7 == isa_r_handler_lut[i].funct3funct7) {
-            isa_r_handler_lut[i].instruction(input->ibex_system, r->rd, r->rs1, r->rs2);
+            isa_r_handler_lut[i].instruction(input->ibex_system, isa_r->rd, isa_r->rs1, isa_r->rs2);
             return ((int16_t) i);
         }
     }

@@ -4,6 +4,7 @@
 #include "isa_j_type.h"
 #include "isa_r_type.h"
 #include "isa_s_type.h"
+#include "isa_u_type.h"
 
 instruction_decode_t id_lut[] = {
     { 0x33, ISA_R, ISA_R_Handler },
@@ -13,6 +14,8 @@ instruction_decode_t id_lut[] = {
     { 0x23, ISA_S, ISA_S_Handler },
     { 0x63, ISA_B, ISA_B_Handler },
     { 0x6F, ISA_J, ISA_J_Handler },
+    { 0x37, ISA_U, ISA_U_Handler },
+    { 0x17, ISA_U, ISA_U_Handler },
 };
 static const uint16_t id_lut_size = sizeof(id_lut) / sizeof(id_lut[0]);
 
@@ -71,6 +74,13 @@ int16_t ID_Decode(uint32_t instruction, isa_input_t* input)
             input->type.j.imm = (uint32_t) ((((instruction >> 31) & 0x1) << 20) | (((instruction >> 12) & 0xFF) << 12)
                 | (((instruction >> 20) & 0x1) << 11) | (((instruction >> 21) & 0x3FF) << 1));
             input->type.j.imm = (input->type.j.imm & 0x100000U) ? (input->type.j.imm | 0xFFE00000U) : input->type.j.imm;
+            break;
+
+        case ISA_U:
+            input->type.u.opcode = (instruction & 0x7F);
+            input->type.u.rd = (instruction >> 7) & 0x1F;
+            input->type.u.imm = (instruction >> 12) & 0xFFFFFUL;
+            input->type.u.imm = (input->type.u.imm & 0x80000U) ? (input->type.u.imm | 0xFFF00000U) : input->type.u.imm;
             break;
 
         default:
