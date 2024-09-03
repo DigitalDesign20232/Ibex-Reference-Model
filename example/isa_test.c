@@ -8,10 +8,10 @@
 void test(ibex_system_t* ibex_system, void isa(ibex_system_t*, uint8_t, uint8_t, uint8_t))
 {
     isa(ibex_system, 5, 8, 23);
-    printf("\nrs1: %10u %10d %08X", ibex_system->reg_file.x[5], ibex_system->reg_file.x[5], ibex_system->reg_file.x[5]);
-    printf("\nrs2: %10u %10d %08X", ibex_system->reg_file.x[8], ibex_system->reg_file.x[8], ibex_system->reg_file.x[8]);
+    printf("\nrs1: %10u %10d %08X", ibex_system->ibex_core.reg_file.x[5], ibex_system->ibex_core.reg_file.x[5], ibex_system->ibex_core.reg_file.x[5]);
+    printf("\nrs2: %10u %10d %08X", ibex_system->ibex_core.reg_file.x[8], ibex_system->ibex_core.reg_file.x[8], ibex_system->ibex_core.reg_file.x[8]);
     printf(
-        "\nrd:  %10u %10d %08X", ibex_system->reg_file.x[23], ibex_system->reg_file.x[23], ibex_system->reg_file.x[23]);
+        "\nrd:  %10u %10d %08X", ibex_system->ibex_core.reg_file.x[23], ibex_system->ibex_core.reg_file.x[23], ibex_system->ibex_core.reg_file.x[23]);
 }
 
 #define TEST(ibex_system, isa_function)                                                                                \

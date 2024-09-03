@@ -51,43 +51,43 @@ int16_t ISA_I_Handler(isa_input_t* input)
 
 void ISA_I_addi(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)
 {
-    int32_t* reg = (int32_t*) ibex_system->reg_file.x;
+    int32_t* reg = (int32_t*) ibex_system->ibex_core.reg_file.x;
     reg[rd] = reg[rs1] + (int32_t) imm;
 }
 
 void ISA_I_xori(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)
 {
-    uint32_t* reg = ibex_system->reg_file.x;
+    uint32_t* reg = ibex_system->ibex_core.reg_file.x;
     reg[rd] = reg[rs1] ^ imm;
 }
 
 void ISA_I_ori(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)
 {
-    uint32_t* reg = ibex_system->reg_file.x;
+    uint32_t* reg = ibex_system->ibex_core.reg_file.x;
     reg[rd] = reg[rs1] | imm;
 }
 
 void ISA_I_andi(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)
 {
-    uint32_t* reg = ibex_system->reg_file.x;
+    uint32_t* reg = ibex_system->ibex_core.reg_file.x;
     reg[rd] = reg[rs1] & imm;
 }
 
 void ISA_I_slli(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)
 {
-    uint32_t* reg = ibex_system->reg_file.x;
+    uint32_t* reg = ibex_system->ibex_core.reg_file.x;
     reg[rd] = reg[rs1] << imm;
 }
 
 void ISA_I_srli(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)
 {
-    uint32_t* reg = ibex_system->reg_file.x;
+    uint32_t* reg = ibex_system->ibex_core.reg_file.x;
     reg[rd] = reg[rs1] >> imm;
 }
 
 void ISA_I_srai(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)
 {
-    int32_t* reg = (int32_t*) ibex_system->reg_file.x;
+    int32_t* reg = (int32_t*) ibex_system->ibex_core.reg_file.x;
     reg[rd] = reg[rs1] >> imm;
 }
 
@@ -102,42 +102,42 @@ static void ISA_I_srli_srai(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1,
 
 void ISA_I_slti(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)
 {
-    int32_t* reg = (int32_t*) ibex_system->reg_file.x;
+    int32_t* reg = (int32_t*) ibex_system->ibex_core.reg_file.x;
     reg[rd] = (reg[rs1] < (int32_t) imm) ? 1L : 0L;
 }
 
 void ISA_I_sltiu(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)
 {
-    uint32_t* reg = ibex_system->reg_file.x;
+    uint32_t* reg = ibex_system->ibex_core.reg_file.x;
     reg[rd] = (reg[rs1] < (uint32_t) imm) ? 1UL : 0UL;
 }
 
 void ISA_I_lb(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)
 {
-    uint32_t* reg = ibex_system->reg_file.x;
+    uint32_t* reg = ibex_system->ibex_core.reg_file.x;
     reg[rd] = (uint32_t) ((int32_t) ((int8_t) ((MEM_LIST_Search(&ibex_system->imem, reg[rs1] + imm)) & 0xFFUL)));
 }
 
 void ISA_I_lh(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)
 {
-    uint32_t* reg = ibex_system->reg_file.x;
+    uint32_t* reg = ibex_system->ibex_core.reg_file.x;
     reg[rd] = (uint32_t) ((int32_t) ((int16_t) ((MEM_LIST_Search(&ibex_system->imem, reg[rs1] + imm)) & 0xFFFFUL)));
 }
 
 void ISA_I_lw(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)
 {
-    uint32_t* reg = ibex_system->reg_file.x;
+    uint32_t* reg = ibex_system->ibex_core.reg_file.x;
     reg[rd] = (uint32_t) ((int32_t) ((MEM_LIST_Search(&ibex_system->imem, reg[rs1] + imm)) & 0xFFFFFFFFUL));
 }
 
 void ISA_I_lbu(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)
 {
-    uint32_t* reg = ibex_system->reg_file.x;
+    uint32_t* reg = ibex_system->ibex_core.reg_file.x;
     reg[rd] = (uint32_t) ((uint8_t) ((MEM_LIST_Search(&ibex_system->imem, reg[rs1] + imm)) & 0xFFUL));
 }
 
 void ISA_I_lhu(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)
 {
-    uint32_t* reg = ibex_system->reg_file.x;
+    uint32_t* reg = ibex_system->ibex_core.reg_file.x;
     reg[rd] = (uint32_t) ((uint16_t) ((MEM_LIST_Search(&ibex_system->imem, reg[rs1] + imm)) & 0xFFFFUL));
 }

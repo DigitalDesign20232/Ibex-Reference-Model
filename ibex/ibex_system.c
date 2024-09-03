@@ -4,7 +4,7 @@
 
 void IBEX_SYSTEM_Constructor(ibex_system_t* ibex_system)
 {
-    IBEX_SYSTEM_RegisterFile_Init(&ibex_system->reg_file);
+    IBEX_SYSTEM_RegisterFile_Init(&ibex_system->ibex_core.reg_file);
     IBEX_SYSTEM_Imem_Init(&ibex_system->imem);
     IBEX_SYSTEM_Dmem_Init(&ibex_system->dmem);
 }
@@ -100,7 +100,7 @@ void IBEX_SYSTEM_Dmem_Init(mem_list_t* dmem)
         }
 
         // Print the parsed values
-        printf("\nDMEM Address: 0x%X, DMEM Value: 0x%X\n", address, data_value);
+        printf("\nDMEM Address: 0x%08X, DMEM Value: 0x%X", address, data_value);
         MEM_LIST_Insert(dmem, address, data_value);
     }
 

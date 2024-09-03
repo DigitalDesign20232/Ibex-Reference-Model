@@ -31,60 +31,60 @@ int16_t ISA_R_Handler(isa_input_t* input)
 
 void ISA_R_add(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint8_t rs2)
 {
-    int32_t* reg = (int32_t*) ibex_system->reg_file.x;
+    int32_t* reg = (int32_t*) ibex_system->ibex_core.reg_file.x;
     reg[rd] = reg[rs1] + reg[rs2];
 }
 
 void ISA_R_sub(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint8_t rs2)
 {
-    int32_t* reg = (int32_t*) ibex_system->reg_file.x;
+    int32_t* reg = (int32_t*) ibex_system->ibex_core.reg_file.x;
     reg[rd] = reg[rs1] - reg[rs2];
 }
 
 void ISA_R_xor(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint8_t rs2)
 {
-    uint32_t* reg = ibex_system->reg_file.x;
+    uint32_t* reg = ibex_system->ibex_core.reg_file.x;
     reg[rd] = reg[rs1] ^ reg[rs2];
 }
 
 void ISA_R_or(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint8_t rs2)
 {
-    uint32_t* reg = ibex_system->reg_file.x;
+    uint32_t* reg = ibex_system->ibex_core.reg_file.x;
     reg[rd] = reg[rs1] | reg[rs2];
 }
 
 void ISA_R_and(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint8_t rs2)
 {
-    uint32_t* reg = ibex_system->reg_file.x;
+    uint32_t* reg = ibex_system->ibex_core.reg_file.x;
     reg[rd] = reg[rs1] & reg[rs2];
 }
 
 void ISA_R_sll(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint8_t rs2)
 {
-    uint32_t* reg = ibex_system->reg_file.x;
+    uint32_t* reg = ibex_system->ibex_core.reg_file.x;
     reg[rd] = reg[rs1] << reg[rs2];
 }
 
 void ISA_R_srl(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint8_t rs2)
 {
-    uint32_t* reg = ibex_system->reg_file.x;
+    uint32_t* reg = ibex_system->ibex_core.reg_file.x;
     reg[rd] = reg[rs1] >> reg[rs2];
 }
 
 void ISA_R_sra(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint8_t rs2)
 {
-    int32_t* reg = (int32_t*) ibex_system->reg_file.x;
+    int32_t* reg = (int32_t*) ibex_system->ibex_core.reg_file.x;
     reg[rd] = reg[rs1] >> reg[rs2];
 }
 
 void ISA_R_slt(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint8_t rs2)
 {
-    int32_t* reg = (int32_t*) ibex_system->reg_file.x;
+    int32_t* reg = (int32_t*) ibex_system->ibex_core.reg_file.x;
     reg[rd] = (reg[rs1] < reg[rs2]) ? 1L : 0L;
 }
 
 void ISA_R_sltu(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint8_t rs2)
 {
-    uint32_t* reg = ibex_system->reg_file.x;
+    uint32_t* reg = ibex_system->ibex_core.reg_file.x;
     reg[rd] = (reg[rs1] < reg[rs2]) ? 1UL : 0UL;
 }

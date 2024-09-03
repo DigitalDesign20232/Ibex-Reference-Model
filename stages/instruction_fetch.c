@@ -10,6 +10,3 @@ uint32_t IF_Fetch(ibex_system_t* ibex_system)
     return node->data.value;
 }
 
-void IF_Destructor(void) {
-
-}
