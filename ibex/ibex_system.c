@@ -49,9 +49,14 @@ void IBEX_SYSTEM_Imem_Init(mem_list_t* imem)
         uint32_t instruction_value = UTIL_Convert_BinaryStringToUint32(instruction_char);
 
         // Print the parsed values
-        printf("Hex: 0x%X, Binary: %s, Instruction Value: %u\n", hex_number, instruction_char, instruction_value);
+        printf("Hex: 0x%X, Binary: %s, Instruction Value: 0x%X\n", hex_number, instruction_char, instruction_value);
         MEM_LIST_Insert(imem, hex_number, instruction_value);
     }
 
     fclose(file);
+}
+
+void IBEX_SYSTEM_Dmem_Init(mem_list_t* dmem)
+{
+    MEM_LIST_Constructor(dmem);
 }

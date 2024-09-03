@@ -2,7 +2,8 @@
 
 instruction_decode_t id_lut[] = {
     { 0x33, ISA_R, ISA_R_Handler },
-    { 0x13, ISA_I, ISA_I_Handler }
+    { 0x13, ISA_I, ISA_I_Handler },
+    { 0x03, ISA_I, ISA_I_Handler },
 };
 static const uint16_t id_lut_size = sizeof(id_lut) / sizeof(id_lut[0]);
 
@@ -29,7 +30,7 @@ int16_t ID_Decode(uint32_t instruction, isa_input_t* input)
             break;
 
         case ISA_I:
-            input->type.i.funct3 = (instruction >> 12) & 0x3;
+            input->type.i.opcode_funct3 = ((instruction & 0x3F) << 4) | ((instruction >> 12) & 0x3);
             input->type.i.rd = (instruction >> 7) & 0x1F;
             input->type.i.rs1 = (instruction >> 15) & 0x1F;
             input->type.i.imm = (uint16_t) ((instruction >> 20) & 0xFFF);

@@ -4,7 +4,7 @@
 #include <stdint.h>
 
 typedef struct {
-    uint8_t funct3;
+    uint16_t opcode_funct3;
     uint8_t rd;
     uint8_t rs1;
     uint16_t imm;

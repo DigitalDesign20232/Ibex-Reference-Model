@@ -33,7 +33,7 @@ int main()
     }
 
     IF_Destructor();
-    printf("\n\nIllegal Instruction: %X", instruction);
+    printf("\n\nIllegal Instruction: 0x%X", instruction);
     printf("\nProgram halted!");
     printf("\n");
     return 0;
