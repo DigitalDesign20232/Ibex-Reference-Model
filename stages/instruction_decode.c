@@ -27,6 +27,7 @@ int16_t ID_Decode(uint32_t instruction, isa_input_t* input)
     if (id_lut_index == -1)
         return -1;
 
+    input->type = (isa_type_data_t) { 0 };
     switch (id_lut[id_lut_index].type) {
         case ISA_R:
             input->type.r.funct3funct7 = (((instruction >> 12) & 0x7) << 8) | ((instruction >> 25) & 0x3F);
@@ -40,6 +41,7 @@ int16_t ID_Decode(uint32_t instruction, isa_input_t* input)
             input->type.i.rd = (instruction >> 7) & 0x1F;
             input->type.i.rs1 = (instruction >> 15) & 0x1F;
             input->type.i.imm = (uint16_t) ((instruction >> 20) & 0xFFF);
+            input->type.i.imm = (input->type.i.imm & 0x800U) ? (input->type.i.imm | 0xF000U) : input->type.i.imm;
             break;
 
         case ISA_S:
@@ -47,16 +49,18 @@ int16_t ID_Decode(uint32_t instruction, isa_input_t* input)
             input->type.s.rs1 = (instruction >> 15) & 0x1F;
             input->type.s.rs2 = (instruction >> 20) & 0x1F;
             input->type.s.imm = (uint16_t) (((instruction >> 25) & 0x7F) << 5) | ((instruction >> 7) & 0x1F);
+            input->type.s.imm = (input->type.s.imm & 0x800U) ? (input->type.s.imm | 0xF000U) : input->type.s.imm;
             break;
 
         case ISA_B:
             input->type.b.funct3 = (instruction >> 12) & 0x7;
             input->type.b.rs1 = (instruction >> 15) & 0x1F;
             input->type.b.rs2 = (instruction >> 20) & 0x1F;
-            input->type.b.imm = (uint16_t) (((instruction >> 31) & 0x1) << 12 | // imm[12]
-                ((instruction >> 25) & 0x3F) << 5 | // imm[10:5]
-                ((instruction >> 8) & 0xF) << 1 | // imm[4:1]
-                ((instruction >> 7) & 0x1)); // imm[11]
+            input->type.b.imm = (uint16_t) ((((instruction >> 31) & 0x1) << 12) | // imm[12]
+                (((instruction >> 7) & 0x1) << 11) | // imm[11]
+                (((instruction >> 25) & 0x3F) << 5) | // imm[10:5]
+                (((instruction >> 8) & 0xF) << 1)); // imm[4:1]
+            input->type.b.imm = (input->type.b.imm & 0x1000U) ? (input->type.b.imm | 0xE000U) : input->type.b.imm;
             break;
 
         default:

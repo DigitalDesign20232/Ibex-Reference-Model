@@ -51,26 +51,26 @@ int16_t ISA_I_Handler(isa_input_t* input)
 
 void ISA_I_addi(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)
 {
-    int32_t* reg = (int32_t*) ibex_system->ibex_core.reg_file.x;
-    reg[rd] = reg[rs1] + (int32_t) imm;
+    uint32_t* reg = ibex_system->ibex_core.reg_file.x;
+    reg[rd] = reg[rs1] + imm;
 }
 
 void ISA_I_xori(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)
 {
     uint32_t* reg = ibex_system->ibex_core.reg_file.x;
-    reg[rd] = reg[rs1] ^ imm;
+    reg[rd] = reg[rs1] ^ ((int32_t) imm);
 }
 
 void ISA_I_ori(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)
 {
     uint32_t* reg = ibex_system->ibex_core.reg_file.x;
-    reg[rd] = reg[rs1] | imm;
+    reg[rd] = reg[rs1] | ((int32_t) imm);
 }
 
 void ISA_I_andi(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)
 {
     uint32_t* reg = ibex_system->ibex_core.reg_file.x;
-    reg[rd] = reg[rs1] & imm;
+    reg[rd] = reg[rs1] & ((int32_t) imm);
 }
 
 void ISA_I_slli(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)

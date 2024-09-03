@@ -19,7 +19,7 @@ int main()
     uint32_t instruction = 0;
     while (1) {
         instruction = IF_Fetch(&ibex_system);
-        printf("\nFetched Instruction: 0x%X", instruction);
+        printf("\nPC = 0x%X | Fetched Instruction: 0x%X", ibex_system.ibex_core.pc, instruction);
 
         int16_t index = ID_Decode(instruction, &input);
         if (index == -1)

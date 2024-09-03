@@ -12,5 +12,10 @@ typedef struct {
 int16_t ISA_B_Handler(isa_input_t* input);
 
 void ISA_B_beq(ibex_system_t* ibex_system, uint8_t rs1, uint8_t rs2, uint16_t imm);
+void ISA_B_bne(ibex_system_t* ibex_system, uint8_t rs1, uint8_t rs2, uint16_t imm);
+void ISA_B_blt(ibex_system_t* ibex_system, uint8_t rs1, uint8_t rs2, uint16_t imm);
+void ISA_B_bge(ibex_system_t* ibex_system, uint8_t rs1, uint8_t rs2, uint16_t imm);
+void ISA_B_bltu(ibex_system_t* ibex_system, uint8_t rs1, uint8_t rs2, uint16_t imm);
+void ISA_B_bgeu(ibex_system_t* ibex_system, uint8_t rs1, uint8_t rs2, uint16_t imm);
 
 #endif
