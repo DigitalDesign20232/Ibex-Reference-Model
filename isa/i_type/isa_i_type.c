@@ -16,6 +16,7 @@ isa_i_handler_t isa_i_handler_lut[] = {
     { 0x032, ISA_I_lw },
     { 0x034, ISA_I_lbu },
     { 0x035, ISA_I_lhu },
+    { 0x670, ISA_I_jalr },
 };
 
 static const uint16_t num_of_isa_i_handler = sizeof(isa_i_handler_lut) / sizeof(isa_i_handler_lut[0]);
@@ -140,4 +141,11 @@ void ISA_I_lhu(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm
 {
     uint32_t* reg = ibex_system->ibex_core.reg_file.x;
     reg[rd] = (uint32_t) ((uint16_t) ((MEM_LIST_Search(&ibex_system->imem, reg[rs1] + imm)) & 0xFFFFUL));
+}
+
+void ISA_I_jalr(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)
+{
+    uint32_t* reg = ibex_system->ibex_core.reg_file.x;
+    reg[rd] = ibex_system->ibex_core.pc + 4;
+    ibex_system->ibex_core.pc = reg[rs1] + (int32_t) imm;
 }

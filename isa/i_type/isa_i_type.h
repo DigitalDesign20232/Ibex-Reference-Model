@@ -27,4 +27,6 @@ void ISA_I_lw(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)
 void ISA_I_lbu(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm);
 void ISA_I_lhu(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm);
 
+void ISA_I_jalr(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm);
+
 #endif
