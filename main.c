@@ -10,18 +10,18 @@
 int main()
 {
     ibex_system_t ibex_system;
-    IBEX_SYSTEM_Init(&ibex_system);
+    IBEX_SYSTEM_Constructor(&ibex_system);
 
     isa_input_t input = {
         .ibex_system = &ibex_system,
     };
 
-    uint32_t instruction = 0;
+    uint32_t pc = 0;
     while (1) {
-        instruction = IF_Fetch(&ibex_system);
-        printf("\nFetched Instruction: 0x%X", instruction);
+        pc = IF_Fetch(&ibex_system);
+        printf("\nFetched Instruction: 0x%X", pc);
 
-        int16_t index = ID_Decode(instruction, &input);
+        int16_t index = ID_Decode(pc, &input);
         if (index == -1)
             break;
 
@@ -33,8 +33,10 @@ int main()
     }
 
     IF_Destructor();
-    printf("\n\nIllegal Instruction: 0x%X", instruction);
+    printf("\n\nIllegal Instruction: 0x%X", pc);
     printf("\nProgram halted!");
     printf("\n");
+
+    IBEX_SYSTEM_Destructor(&ibex_system);
     return 0;
 }

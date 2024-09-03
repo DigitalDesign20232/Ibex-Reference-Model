@@ -5,7 +5,7 @@
 #include "isa_def.h"
 
 typedef struct {
-    uint32_t opcode_funct3;
+    uint16_t opcode_funct3;
     void (*instruction)(ibex_system_t*, uint8_t, uint8_t, uint16_t);
 } isa_i_handler_t;
 

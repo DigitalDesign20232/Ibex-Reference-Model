@@ -2,12 +2,14 @@
 #define ISA_DEF_H
 
 #include "ibex_def.h"
-#include "isa_r_type_def.h"
 #include "isa_i_type_def.h"
+#include "isa_r_type_def.h"
+#include "isa_s_type_def.h"
 
 typedef enum {
     ISA_R,
-    ISA_I
+    ISA_I,
+    ISA_S,
 } isa_type_t;
 
 typedef struct {
@@ -15,6 +17,7 @@ typedef struct {
     union {
         isa_r_data_t r;
         isa_i_data_t i;
+        isa_s_data_t s;
     } type;
 } isa_input_t;
 

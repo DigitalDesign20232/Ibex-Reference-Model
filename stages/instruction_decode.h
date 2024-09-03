@@ -3,8 +3,6 @@
 
 #include <stdint.h>
 #include "isa_def.h"
-#include "isa_r_type.h"
-#include "isa_i_type.h"
 
 typedef struct {
     uint8_t opcode;

@@ -2,11 +2,31 @@
 #include "util_convert.h"
 #include <stdio.h>
 
-void IBEX_SYSTEM_Init(ibex_system_t* ibex_system)
+void IBEX_SYSTEM_Constructor(ibex_system_t* ibex_system)
 {
     IBEX_SYSTEM_RegisterFile_Init(&ibex_system->reg_file);
     IBEX_SYSTEM_Imem_Init(&ibex_system->imem);
-    IBEX_SYSTEM_Dmem_Init(&ibex_system->imem);
+    IBEX_SYSTEM_Dmem_Init(&ibex_system->dmem);
+}
+
+void IBEX_SYSTEM_Destructor(ibex_system_t* ibex_system)
+{
+    FILE* file = fopen("data/dmem.mem", "w");
+    if (!file) {
+        perror("Failed to open file");
+        return;
+    }
+
+    mem_list_node_t* current = ibex_system->dmem.head;
+    while (current) {
+        fprintf(file, "0x%X,0x%X\n", current->data.address, current->data.value);
+        current = current->next;
+    }
+
+    fclose(file);
+
+    MEM_LIST_Destructor(&ibex_system->imem);
+    MEM_LIST_Destructor(&ibex_system->dmem);
 }
 
 void IBEX_SYSTEM_RegisterFile_Init(register_file_t* reg_file)
@@ -50,7 +70,8 @@ void IBEX_SYSTEM_Imem_Init(mem_list_t* imem)
         uint32_t instruction_value = UTIL_Convert_BinaryStringToUint32(instruction_char);
 
         // Print the parsed values
-        printf("\nIMEM Address: 0x%X, IMEM Instruction Binary: %s, IMEM Instruction Value: 0x%X", address, instruction_char, instruction_value);
+        printf("\nIMEM Address: 0x%X, IMEM Instruction Binary: %s, IMEM Instruction Value: 0x%X", address,
+            instruction_char, instruction_value);
         MEM_LIST_Insert(imem, address, instruction_value);
     }
 

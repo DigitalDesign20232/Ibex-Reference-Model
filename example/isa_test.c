@@ -21,7 +21,7 @@ void test(ibex_system_t* ibex_system, void isa(ibex_system_t*, uint8_t, uint8_t,
 int main()
 {
     ibex_system_t ibex_system;
-    IBEX_SYSTEM_Init(&ibex_system);
+    IBEX_SYSTEM_Constructor(&ibex_system);
 
     ibex_system.reg_file.x[5] = (uint32_t) -12635;
     ibex_system.reg_file.x[8] = (uint32_t) 4;
