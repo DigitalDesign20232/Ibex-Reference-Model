@@ -16,24 +16,31 @@ int main()
         .ibex_system = &ibex_system,
     };
 
+    int16_t index;
     uint32_t instruction = 0;
     while (1) {
         instruction = IF_Fetch(&ibex_system);
         printf("\nPC = 0x%X | Fetched Instruction: 0x%X", ibex_system.ibex_core.pc, instruction);
 
-        int16_t index = ID_Decode(instruction, &input);
-        if (index == -1)
+        index = ID_Decode(instruction, &input);
+        if (index == -1 || index == -2 || index == -3)
             break;
 
         index = ID_RunInstruction(index, &input);
-        if (index == -1)
+        if (index == -1 || index == -2 || index == -3)
             break;
 
         WB_WriteReg(&ibex_system);
     }
 
-    printf("\n\nIllegal Instruction: 0x%X", instruction);
-    printf("\nProgram halted!");
+    if (index == -1) {
+        printf("\n\nIllegal Instruction: 0x%X", instruction);
+        printf("\nProgram halted!");
+    } else if (index == -2) {
+        printf("\n\nReturn control to OS");
+    } else if (index == -3) {
+        printf("\n\nReturn control to debugger");
+    }
     printf("\n");
 
     IBEX_SYSTEM_Destructor(&ibex_system);

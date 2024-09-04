@@ -38,6 +38,14 @@ int16_t ISA_I_Handler(isa_input_t* input)
                     imm5_11 = (isa_i->imm >> 5) & 0x7F;
                     if (imm5_11 != 0x00 && imm5_11 != 0x20)
                         return -1;
+                    break;
+
+                case 0x730:
+                    imm5_11 = (isa_i->imm >> 5) & 0x7F;
+                    if (imm5_11 == 0x0) return -2;
+                    else if (imm5_11 == 0x1) return -3;
+                    else return -1;
+                    break;
 
                 default:
                     break;
@@ -116,31 +124,31 @@ void ISA_I_sltiu(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t i
 void ISA_I_lb(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)
 {
     uint32_t* reg = ibex_system->ibex_core.reg_file.x;
-    reg[rd] = (uint32_t) ((int32_t) ((int8_t) ((MEM_LIST_Search(&ibex_system->imem, reg[rs1] + imm)) & 0xFFUL)));
+    reg[rd] = (uint32_t) ((int32_t) ((int8_t) ((MEM_LIST_Search(&ibex_system->dmem, reg[rs1] + imm)) & 0xFFUL)));
 }
 
 void ISA_I_lh(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)
 {
     uint32_t* reg = ibex_system->ibex_core.reg_file.x;
-    reg[rd] = (uint32_t) ((int32_t) ((int16_t) ((MEM_LIST_Search(&ibex_system->imem, reg[rs1] + imm)) & 0xFFFFUL)));
+    reg[rd] = (uint32_t) ((int32_t) ((int16_t) ((MEM_LIST_Search(&ibex_system->dmem, reg[rs1] + imm)) & 0xFFFFUL)));
 }
 
 void ISA_I_lw(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)
 {
     uint32_t* reg = ibex_system->ibex_core.reg_file.x;
-    reg[rd] = (uint32_t) ((int32_t) ((MEM_LIST_Search(&ibex_system->imem, reg[rs1] + imm)) & 0xFFFFFFFFUL));
+    reg[rd] = (uint32_t) ((int32_t) ((MEM_LIST_Search(&ibex_system->dmem, reg[rs1] + imm)) & 0xFFFFFFFFUL));
 }
 
 void ISA_I_lbu(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)
 {
     uint32_t* reg = ibex_system->ibex_core.reg_file.x;
-    reg[rd] = (uint32_t) ((uint8_t) ((MEM_LIST_Search(&ibex_system->imem, reg[rs1] + imm)) & 0xFFUL));
+    reg[rd] = (uint32_t) ((uint8_t) ((MEM_LIST_Search(&ibex_system->dmem, reg[rs1] + imm)) & 0xFFUL));
 }
 
 void ISA_I_lhu(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)
 {
     uint32_t* reg = ibex_system->ibex_core.reg_file.x;
-    reg[rd] = (uint32_t) ((uint16_t) ((MEM_LIST_Search(&ibex_system->imem, reg[rs1] + imm)) & 0xFFFFUL));
+    reg[rd] = (uint32_t) ((uint16_t) ((MEM_LIST_Search(&ibex_system->dmem, reg[rs1] + imm)) & 0xFFFFUL));
 }
 
 void ISA_I_jalr(ibex_system_t* ibex_system, uint8_t rd, uint8_t rs1, uint16_t imm)
